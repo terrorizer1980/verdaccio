@@ -89,7 +89,7 @@ export interface IStorageHandler extends IStorageManager<Config>, ITokenActions 
   _updateVersionsHiddenUpLink(versions: Versions, upLink: IProxy): void;
 }
 
-class Storage {
+class Storage implements IStorageHandler {
   public localStorage: IStorage;
   public config: Config;
   public logger: Logger;
@@ -392,10 +392,11 @@ class Storage {
       }
 
       debug('sync uplinks for %o', name);
+      const { req, uplinksLook } = options;
       this._syncUplinksMetadata(
         name,
         data,
-        { req: options.req, uplinksLook: options.uplinksLook },
+        { req, uplinksLook },
         function getPackageSynUpLinksCallback(err, result: Package, uplinkErrors): void {
           if (err) {
             debug('error on sync package for %o with error %o', name, err?.message);
@@ -547,7 +548,8 @@ class Storage {
     let found = true;
     const self = this;
     const upLinks: IProxy[] = [];
-    const hasToLookIntoUplinks = _.isNil(options.uplinksLook) || options.uplinksLook;
+    const { uplinksLook } = options;
+    const hasToLookIntoUplinks = _.isNil(uplinksLook) || uplinksLook;
 
     if (!packageInfo) {
       found = false;
