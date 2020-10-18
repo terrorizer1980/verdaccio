@@ -23,6 +23,7 @@
     "build": "pnpm run build:js && pnpm run build:types"
   },
   "dependencies": {
+    "@verdaccio/commons-api": "workspace:*",
     "@verdaccio/dev-commons": "workspace:5.0.0-alpha.0",
     "@verdaccio/local-storage": "workspace:*",
     "@verdaccio/logger": "workspace:5.0.0-alpha.0",
@@ -31,15 +32,16 @@
     "@zeit/fetch-retry": "^5.0.0",
     "JSONStream": "1.3.5",
     "abort-controller": "^3.0.0",
+    "got": "^11.7.0",
+    "debug": "^4.2.0",
     "lodash": "^4.17.20",
     "node-fetch": "^3.0.0-beta.9",
     "request": "2.87.0"
   },
   "devDependencies": {
     "@verdaccio/types": "workspace:*",
-    "express": "^5.0.0-alpha.7",
+    "express": "^4.17.1",
     "nock": "^13.0.4",
     "supertest": "^5.0.0"
-  },
-  "gitHead": "7c246ede52ff717707fcae66dd63fc4abd536982"
+  }
 }
